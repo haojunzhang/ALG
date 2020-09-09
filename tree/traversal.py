@@ -27,40 +27,85 @@ def get():
     return n1
 
 
-def preorder(node):
+def preorder(node, result):
     # 中左右
-    print(node.val)
+    result.append(node.val)
 
     if node.l:
-        preorder(node.l)
+        preorder(node.l, result)
 
     if node.r:
-        preorder(node.r)
+        preorder(node.r, result)
 
 
-def inorder(node):
+def inorder(node, result):
     # 左中右
-    pass
+    if node.l:
+        inorder(node.l, result)
+
+    result.append(node.val)
+
+    if node.r:
+        inorder(node.r, result)
 
 
-def postorder(node):
+def postorder(node, result):
     # 左右中
-    pass
+    if node.l:
+        postorder(node.l, result)
+
+    if node.r:
+        postorder(node.r, result)
+
+    result.append(node.val)
 
 
-def dfs(node):
-    pass
+def dfs(node, result):
+    result.append(node.val)
+
+    if node.l:
+        dfs(node.l, result)
+
+    if node.r:
+        dfs(node.r, result)
 
 
-def bfs(node):
-    pass
+def bfs(q, result):
+    if len(q) == 0:
+        return None
+
+    node = q.pop()
+    result.append(node.val)
+
+    if node.l:
+        q.insert(0, node.l)
+
+    if node.r:
+        q.insert(0, node.r)
+
+    bfs(q, result)
 
 
 if __name__ == "__main__":
     node = get()
 
-    preorder(node)
-    # inorder(node)
-    # postorder(node)
-    # dfs(node)
-    # bfs(node)
+    # ret = []
+    # preorder(node, ret)
+    # print(ret)
+
+    # ret = []
+    # inorder(node, ret)
+    # print(ret)
+
+    # ret = []
+    # postorder(node, ret)
+    # print(ret)
+
+    # ret = []
+    # dfs(node, ret)
+    # print(ret)
+
+    ret = []
+    q = [node]
+    bfs(q, ret)
+    print(ret)
