@@ -86,6 +86,28 @@ def bfs(q, result):
     bfs(q, result)
 
 
+def print_tree(node):
+    def dfs(node, level, ret):
+        if level not in ret:
+            ret[level] = []
+
+        ret[level].append(node.val)
+
+        if node.l:
+            dfs(node.l, level + 1, ret)
+
+        if node.r:
+            dfs(node.r, level + 1, ret)
+
+    ret = {}
+    dfs(node, 1, ret)
+    text = ''
+    for k,  v in ret.items():
+        text += '\n' if len(text) != 0 else ''
+        text += str(v)
+    print(f'{text}')
+
+
 if __name__ == "__main__":
     node = get()
 
@@ -105,7 +127,8 @@ if __name__ == "__main__":
     # dfs(node, ret)
     # print(ret)
 
-    ret = []
-    q = [node]
-    bfs(q, ret)
-    print(ret)
+    # ret = []
+    # q = [node]
+    # bfs(q, ret)
+    # print(ret)
+    print_tree(node)
